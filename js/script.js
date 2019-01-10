@@ -13,6 +13,9 @@ var message;
 var messageOfHour = document.getElementById('timeEvent');
 var lolcatImage = document.getElementById('lolcat');
 var image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/08/normalTime.jpg";
+var isPartyTime = false;
+var partyButton = document.getElementById('partyTimeButton');
+var wakeupTimeSelector = document.getElementById('wakeUpTimeSelector');
 
 // Clock
 
@@ -44,37 +47,57 @@ var updateClock = function() {
 	showCurrentTime();
 };
 
-// Message
+// Message and Images
 if (currentHour == partyTime) {
     image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat4.jpg";
-	var message = "Let's party!";
+	message = "Let's party!";
 }
 else if (currentHour == napTime) {
     image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat3.jpg";
-	var message = "Time for a nap.";
+	message = "Time for a nap.";
 }
 else if (currentHour == lunchTime) {
     image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat2.jpg";
-	var message = "Time for lunch!";
+	message = "Time for lunch!";
 }
 else if (currentHour == wakeupTime) {
     image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat1.jpg";
-	var message = "Good morning! Time to get up.";
+	message = "Good morning! Time to get up.";
 }
 else if (currentHour < noon) {
-	var message = "Good morning!";
+	message = "Good morning!";
 }
 else if (currentHour > evening) {
-	var message = "Good evening!";
+	message = "Good evening!";
 }
 else {
-	var message = "Good afternoon!";
+	message = "Good afternoon!";
 }
 
 // Dynamically puts the message where the timeEvent ID lives
 messageOfHour.innerText = message;
 lolcatImage.src = image;
+
+// Party Time button
+var partyEvent = function () {
+	//Check isPartyTime
+	if (isPartyTime === false) {
+		isPartyTime = true;
+		currentHour = partyTime;
+		partyButton.style.backgroundColor = "#ff0";
+		partyButton.style.color = "#000";
+	}
+	else {
+		isPartyTime = false;
+		currentHour = new Date().getHours();
+		partyButton.style.backgroundColor = "#222";
+		partyButton.style.color = "#fff";
+	}
+};
+
 // Populates clock ID with current time and increments it in one second intervals.
 updateClock();
 var oneSecond = 1000;
 setInterval(updateClock, oneSecond);
+// Activates button
+partyButton.addEventListener('click', partyEvent);
