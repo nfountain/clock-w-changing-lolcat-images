@@ -10,6 +10,7 @@ var napTime = 14;
 var lunchTime = 12;
 var wakeupTime = 7;
 var message;
+var messageOfHour = document.getElementById("timeEvent");
 
 // Message
 if (currentTime == partyTime) {
@@ -34,4 +35,5 @@ else {
 	var message = "Good afternoon!";
 } 
 
-console.log(message);
+// Dynamically puts the message where the timeEvent ID lives
+messageOfHour.innerText = message;
