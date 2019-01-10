@@ -18,7 +18,7 @@ var image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content
 
 var updateClock = function() {
 	var showCurrentTime = function() {
-		var clock = document.getElementById('clock')
+		var clock = document.getElementById('clock');
 		var currentTime = new Date();
 		var hours = currentTime.getHours();
 		var minutes = currentTime.getMinutes();
@@ -31,22 +31,18 @@ var updateClock = function() {
 		if(hours > noon) {
 			hours = (hours - 12);
 		}
-
 		if (minutes < 10) {
 			minutes = "0" + minutes;
 		}
-
 		if (seconds < 10) {
 			seconds = "0" + seconds;
 		}
 
 		var clockTime = hours + ":" + minutes + ":" + seconds + " " + meridian + "!";
-
 		clock.innerText = clockTime;
 	};
-
 	showCurrentTime();
-}
+};
 
 // Message
 if (currentHour == partyTime) {
@@ -78,7 +74,7 @@ else {
 // Dynamically puts the message where the timeEvent ID lives
 messageOfHour.innerText = message;
 lolcatImage.src = image;
-
+// Populates clock ID with current time and increments it in one second intervals.
 updateClock();
 var oneSecond = 1000;
 setInterval(updateClock, oneSecond);
