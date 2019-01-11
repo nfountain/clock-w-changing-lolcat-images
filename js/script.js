@@ -54,23 +54,14 @@ var updateClock = function() {
 				console.log(startHour + " Holy mackerel it might work!");
 				setImageMssg();
 			}
-			else if (minSec != "00:00") {
-				//console.log("not right now, mate.")
-			}
 		}
-
 		checkHr();
-
 	};
-
 	showCurrentTime();
 };
 
 // Message and Images
 var setImageMssg = function () {
-	console.log("Running!");
-	//startHour = new Date().getHours();
-
 	if (startHour == partyTime) {
 		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat4.jpg";
 		message = "Let's party!";
