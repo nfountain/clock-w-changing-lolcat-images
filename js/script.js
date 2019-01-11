@@ -16,9 +16,10 @@ var image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content
 var isPartyTime = false;
 var partyButton = document.getElementById('partyTimeButton');
 var wakeupTimeSelector = document.getElementById('wakeUpTimeSelector');
+var lunchTimeSelector = document.getElementById('lunchTimeSelector');
+var napTimeSelector = document.getElementById('napTimeSelector');
 
 // Clock
-
 var updateClock = function() {
 	var showCurrentTime = function() {
 		var clock = document.getElementById('clock');
@@ -74,9 +75,18 @@ else {
 	message = "Good afternoon!";
 }
 
-// Dynamically puts the message where the timeEvent ID lives
-messageOfHour.innerText = message;
-lolcatImage.src = image;
+// Time Selectors - allows the selectors to rewrite the different times (wakeup, lunch and nap)
+var wakeUpEvent = function() {
+	wakeupTime = wakeupTimeSelector.value;
+};
+
+var lunchEvent = function() {
+	lunchTime = lunchTimeSelector.value;
+};
+
+var napEvent = function() {
+	napTime = napTimeSelector.value;
+};
 
 // Party Time button
 var partyEvent = function () {
@@ -95,9 +105,18 @@ var partyEvent = function () {
 	}
 };
 
+// Dynamically puts the message where the timeEvent ID lives
+messageOfHour.innerText = message;
+lolcatImage.src = image;
 // Populates clock ID with current time and increments it in one second intervals.
 updateClock();
 var oneSecond = 1000;
 setInterval(updateClock, oneSecond);
+
 // Activates button
 partyButton.addEventListener('click', partyEvent);
+
+// Time Selectors
+wakeupTimeSelector.addEventListener('change', wakeUpEvent);
+lunchTimeSelector.addEventListener('change', lunchEvent);
+napTimeSelector.addEventListener('change', napEvent);
