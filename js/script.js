@@ -2,12 +2,13 @@
 console.log("Hello World");
 
 // Global Variables
-var currentHour = new Date().getHours();
+var startHour = new Date().getHours();
 var noon = 12;
 var evening = 17;
 var partyTime = 21;
-var napTime = 14;
+var napTime = 15;
 var lunchTime = 12;
+var dinnerTime = 17;
 var wakeupTime = 7;
 var message;
 var messageOfHour = document.getElementById('timeEvent');
@@ -44,33 +45,57 @@ var updateClock = function() {
 
 		var clockTime = hours + ":" + minutes + ":" + seconds + " " + meridian + "!";
 		clock.innerText = clockTime;
+
+		var minSec = (minutes + ":" + seconds);
+		
+		var checkHr = function() {
+			if (minSec == "00:00") {
+				startHour = new Date().getHours();
+				console.log(startHour + " Holy mackerel it might work!");
+				setImageMssg();
+			}
+			else if (minSec != "00:00") {
+				//console.log("not right now, mate.")
+			}
+		}
+
+		checkHr();
+
 	};
+
 	showCurrentTime();
 };
 
 // Message and Images
 var setImageMssg = function () {
-	if (currentHour == partyTime) {
+	console.log("Running!");
+	startHour = new Date().getHours();
+
+	if (startHour == partyTime) {
 		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat4.jpg";
 		message = "Let's party!";
 	}
-	else if (currentHour == napTime) {
+	else if (startHour == napTime) {
 		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat3.jpg";
 		message = "Time for a nap.";
 	}
-	else if (currentHour == lunchTime) {
+	else if (startHour == lunchTime) {
 		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat2.jpg";
 		message = "Time for lunch!";
 	}
-	else if (currentHour == wakeupTime) {
+	else if (startHour == dinnerTime) {
+		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat2.jpg";
+		message = "Time for dinner!";
+	}
+	else if (startHour == wakeupTime) {
 		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat1.jpg";
 		message = "Good morning! Time to get up.";
 	}
-	else if (currentHour < noon) {
+	else if (startHour < noon) {
 		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/08/normalTime.jpg";
 		message = "Good morning!";
 	}
-	else if (currentHour > evening) {
+	else if (startHour > evening) {
 		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/08/normalTime.jpg";
 		message = "Good evening!";
 	}
@@ -79,6 +104,7 @@ var setImageMssg = function () {
 		message = "Good afternoon!";
 	}
 
+	// Dynamically puts the message where the timeEvent ID lives and changes image
 	messageOfHour.innerText = message;
 	lolcatImage.src = image;
 
@@ -104,26 +130,23 @@ var napEvent = function() {
 
 // Party Time button
 var partyEvent = function () {
-	//Check isPartyTime
+	//Check isPartyTime, then do the thing
 	if (isPartyTime === false) {
 		isPartyTime = true;
-		currentHour = partyTime;
+		startHour = partyTime;
 		partyButton.style.backgroundColor = "#ff0";
 		partyButton.style.color = "#000";
 		setImageMssg();
 	}
 	else {
 		isPartyTime = false;
-		currentHour = new Date().getHours();
+		startHour = new Date().getHours();
 		partyButton.style.backgroundColor = "#222";
 		partyButton.style.color = "#fff";
 		setImageMssg();
 	}
 };
 
-// Dynamically puts the message where the timeEvent ID lives
-//messageOfHour.innerText = message;
-//lolcatImage.src = image;
 // Populates clock ID with current time and increments it in one second intervals.
 updateClock();
 var oneSecond = 1000;
