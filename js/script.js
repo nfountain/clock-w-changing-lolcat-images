@@ -8,7 +8,6 @@ var evening = 17;
 var partyTime = 21;
 var napTime = 15;
 var lunchTime = 12;
-var dinnerTime = 17;
 var wakeupTime = 7;
 var message;
 var messageOfHour = document.getElementById('timeEvent');
@@ -73,10 +72,6 @@ var setImageMssg = function () {
 	else if (startHour == lunchTime) {
 		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat2.jpg";
 		message = "Time for lunch!";
-	}
-	else if (startHour == dinnerTime) {
-		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat2.jpg";
-		message = "Time for dinner!";
 	}
 	else if (startHour == wakeupTime) {
 		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat1.jpg";
