@@ -49,43 +49,57 @@ var updateClock = function() {
 };
 
 // Message and Images
-if (currentHour == partyTime) {
-    image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat4.jpg";
-	message = "Let's party!";
-}
-else if (currentHour == napTime) {
-    image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat3.jpg";
-	message = "Time for a nap.";
-}
-else if (currentHour == lunchTime) {
-    image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat2.jpg";
-	message = "Time for lunch!";
-}
-else if (currentHour == wakeupTime) {
-    image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat1.jpg";
-	message = "Good morning! Time to get up.";
-}
-else if (currentHour < noon) {
-	message = "Good morning!";
-}
-else if (currentHour > evening) {
-	message = "Good evening!";
-}
-else {
-	message = "Good afternoon!";
-}
+var setImageMssg = function () {
+	if (currentHour == partyTime) {
+		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat4.jpg";
+		message = "Let's party!";
+	}
+	else if (currentHour == napTime) {
+		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat3.jpg";
+		message = "Time for a nap.";
+	}
+	else if (currentHour == lunchTime) {
+		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat2.jpg";
+		message = "Time for lunch!";
+	}
+	else if (currentHour == wakeupTime) {
+		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/09/cat1.jpg";
+		message = "Good morning! Time to get up.";
+	}
+	else if (currentHour < noon) {
+		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/08/normalTime.jpg";
+		message = "Good morning!";
+	}
+	else if (currentHour > evening) {
+		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/08/normalTime.jpg";
+		message = "Good evening!";
+	}
+	else {
+		image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/08/normalTime.jpg";
+		message = "Good afternoon!";
+	}
+
+	messageOfHour.innerText = message;
+	lolcatImage.src = image;
+
+};
+
+setImageMssg();
 
 // Time Selectors - allows the selectors to rewrite the different times (wakeup, lunch and nap)
 var wakeUpEvent = function() {
 	wakeupTime = wakeupTimeSelector.value;
+	setImageMssg();
 };
 
 var lunchEvent = function() {
 	lunchTime = lunchTimeSelector.value;
+	setImageMssg();
 };
 
 var napEvent = function() {
 	napTime = napTimeSelector.value;
+	setImageMssg();
 };
 
 // Party Time button
@@ -96,18 +110,20 @@ var partyEvent = function () {
 		currentHour = partyTime;
 		partyButton.style.backgroundColor = "#ff0";
 		partyButton.style.color = "#000";
+		setImageMssg();
 	}
 	else {
 		isPartyTime = false;
 		currentHour = new Date().getHours();
 		partyButton.style.backgroundColor = "#222";
 		partyButton.style.color = "#fff";
+		setImageMssg();
 	}
 };
 
 // Dynamically puts the message where the timeEvent ID lives
-messageOfHour.innerText = message;
-lolcatImage.src = image;
+//messageOfHour.innerText = message;
+//lolcatImage.src = image;
 // Populates clock ID with current time and increments it in one second intervals.
 updateClock();
 var oneSecond = 1000;
