@@ -17,7 +17,6 @@ $(document).ready(function() {
 	// Clock
 	var updateClock = function() {
 		var showCurrentTime = function() {
-			var clock = document.getElementById('clock');
 			var currentTime = new Date();
 			var hours = currentTime.getHours();
 			var minutes = currentTime.getMinutes();
@@ -38,14 +37,13 @@ $(document).ready(function() {
 			}
 
 			var clockTime = hours + ":" + minutes + ":" + seconds + " " + meridian + "!";
-			clock.innerText = clockTime;
+			$('#clock').text(clockTime);
 
 			var minSec = (minutes + ":" + seconds);
 			
 			var checkHr = function() {
 				if (minSec == "00:00") {
 					startHour = new Date().getHours();
-					console.log(startHour + " Holy mackerel it might work!");
 					setImageMssg();
 				}
 			}
