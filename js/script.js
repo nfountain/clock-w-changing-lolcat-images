@@ -13,10 +13,6 @@ $(document).ready(function() {
 	var lolcatImage = document.getElementById('lolcat');
 	var image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/08/normalTime.jpg";
 	var isPartyTime = false;
-	var partyButton = document.getElementById('partyTimeButton');
-	var wakeupTimeSelector = document.getElementById('wakeUpTimeSelector');
-	var lunchTimeSelector = document.getElementById('lunchTimeSelector');
-	var napTimeSelector = document.getElementById('napTimeSelector');
 
 	// Clock
 	var updateClock = function() {
@@ -99,17 +95,17 @@ $(document).ready(function() {
 
 	// Time Selectors - allows the selectors to rewrite the different times (wakeup, lunch and nap)
 	var wakeUpEvent = function() {
-		wakeupTime = wakeupTimeSelector.value;
+		wakeupTime = $('#wakeUpTimeSelector').val();
 		setImageMssg();
 	};
 
 	var lunchEvent = function() {
-		lunchTime = lunchTimeSelector.value;
+		lunchTime = $('#lunchTimeSelector').val();
 		setImageMssg();
 	};
 
 	var napEvent = function() {
-		napTime = napTimeSelector.value;
+		napTime = $('#napTimeSelector').val();
 		setImageMssg();
 	};
 
@@ -119,15 +115,15 @@ $(document).ready(function() {
 		if (isPartyTime === false) {
 			isPartyTime = true;
 			startHour = partyTime;
-			partyButton.style.backgroundColor = "#ff0";
-			partyButton.style.color = "#000";
+			$('#partyTimeButton').css('backgroundColor', '#ff0');
+			$('#partyTimeButton').css('color', '#000');
 			setImageMssg();
 		}
 		else {
 			isPartyTime = false;
 			startHour = new Date().getHours();
-			partyButton.style.backgroundColor = "#222";
-			partyButton.style.color = "#fff";
+			$('#partyTimeButton').css('backgroundColor', '#222');
+			$('#partyTimeButton').css('color', '#fff');
 			setImageMssg();
 		}
 	};
@@ -142,8 +138,8 @@ $(document).ready(function() {
 	// Keyboard navigation already allows for tabbing and using enter/space to trigger the button.
 	
 	// Time Selectors
-	wakeupTimeSelector.addEventListener('change', wakeUpEvent);
-	lunchTimeSelector.addEventListener('change', lunchEvent);
-	napTimeSelector.addEventListener('change', napEvent);
+	$('#wakeUpTimeSelector').change(wakeUpEvent);
+	$('#lunchTimeSelector').change(lunchEvent);
+	$('#napTimeSelector').change(napEvent);
 
 })
