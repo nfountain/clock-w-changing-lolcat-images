@@ -9,8 +9,6 @@ $(document).ready(function() {
 	var lunchTime = 12;
 	var wakeupTime = 7;
 	var message;
-	var messageOfHour = document.getElementById('timeEvent');
-	var lolcatImage = document.getElementById('lolcat');
 	var image = "https://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2016/08/normalTime.jpg";
 	var isPartyTime = false;
 
@@ -84,8 +82,8 @@ $(document).ready(function() {
 		}
 
 		// Dynamically puts the message where the timeEvent ID lives and changes image
-		messageOfHour.innerText = message;
-		lolcatImage.src = image;
+		$('#timeEvent').text(message);
+		$('#lolcat').attr('src', image);
 
 	};
 
